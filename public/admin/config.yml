@@ -1,18 +1,20 @@
 backend:
   name: git-gateway
-  branch: main # Asegúrate de que tu rama sea 'main'
+  branch: main
 
-media_folder: "public/images/uploads" # Donde se guardarán las fotos
+media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
   - name: "shows"
-    label: "Shows y Eventos"
-    folder: "src/content/shows" # Donde Astro leerá los archivos
-    create: true # Permite al cliente agregar nuevos
-    slug: "{{slug}}"
+    label: "Cartelera de Shows"
+    folder: "src/content/shows"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Título del Show", name: "title", widget: "string" }
-      - { label: "Fecha del Evento", name: "date", widget: "string", hint: "Ej: SAB 15 MAR" }
-      - { label: "Imagen de Portada", name: "image", widget: "image" }
-      - { label: "Descripción", name: "body", widget: "markdown", required: false }
+      - { label: "Nombre del Evento", name: "title", widget: "string" }
+      - { label: "Fecha (Ej: SAB 15 MAR)", name: "date", widget: "string" }
+      - { label: "Lugar / Estadio", name: "location", widget: "string", hint: "Ej: Movistar Arena" }
+      - { label: "Imagen del Flyer", name: "image", widget: "image" }
+      - { label: "Link de Entradas", name: "link", widget: "string", required: false }
+      - { label: "Descripción del Show", name: "body", widget: "markdown", hint: "Detalles adicionales, line-up, etc." }
