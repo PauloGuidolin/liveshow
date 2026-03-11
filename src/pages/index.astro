@@ -1,11 +1,114 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Importamos todos los componentes separados
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Events from '../components/Events.astro';
+import Testimonios from '../components/Testimonios.astro';
+import Contact from '../components/Contact.astro';
+import Map from '../components/Map.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import "../styles/global.css";
+
+
+// Datos de configuración rápida
+const WHATSAPP_NUMBER = "5491122334455"; 
+const PAGE_TITLE = "LIVE SHOW PROD | Espectáculos y Eventos de Alto Impacto";
 ---
 
-<Layout>
-	<Welcome />
+<Layout title={PAGE_TITLE}>
+	
+	<Header />
+
+	<main class="bg-black text-white overflow-x-hidden">
+		
+		<section id="inicio">
+			<Hero />
+		</section>
+
+		<div class="bg-fuchsia-600 py-6 overflow-hidden border-y border-white/10">
+			<div class="flex whitespace-nowrap animate-marquee gap-10 items-center">
+				<span class="text-black font-black text-2xl uppercase italic italic tracking-tighter italic">✦ Shows en Vivo</span>
+				<span class="text-white font-black text-2xl uppercase italic tracking-tighter italic">✦ Sonido Profesional</span>
+				<span class="text-black font-black text-2xl uppercase italic tracking-tighter italic">✦ Iluminación Robótica</span>
+				<span class="text-white font-black text-2xl uppercase italic tracking-tighter italic">✦ Artistas Exclusivos</span>
+				<span class="text-black font-black text-2xl uppercase italic tracking-tighter italic">✦ Shows en Vivo</span>
+				<span class="text-white font-black text-2xl uppercase italic tracking-tighter italic">✦ Sonido Profesional</span>
+				<span class="text-black font-black text-2xl uppercase italic tracking-tighter italic">✦ Iluminación Robótica</span>
+			</div>
+		</div>
+
+		<section id="eventos" class="scroll-mt-20">
+			<Events />
+		</section>
+
+		<section id="nosotros" class="scroll-mt-20">
+			<Testimonios />
+		</section>
+
+		<section id="contacto" class="scroll-mt-20">
+			<Contact />
+		</section>
+
+		<Map />
+
+	</main>
+
+	<Footer />
+
+	<WhatsAppButton phone={WHATSAPP_NUMBER} />
+
 </Layout>
+
+<style is:global>
+	/* Optimizaciones de UX */
+	html {
+		scroll-behavior: smooth;
+		background-color: #000;
+	}
+
+	body {
+		margin: 0;
+		font-family: 'Inter', sans-serif;
+	}
+
+	/* Animación del banner de texto (Marquee) */
+	@keyframes marquee {
+		0% { transform: translateX(0); }
+		100% { transform: translateX(-50%); }
+	}
+	.animate-marquee {
+		display: flex;
+		width: 200%;
+		animation: marquee 20s linear infinite;
+	}
+
+	/* Efecto de scroll reveal sutil */
+	section {
+		view-timeline-name: --section;
+		view-timeline-axis: block;
+		animation-timeline: --section;
+		animation-name: show-up;
+		animation-range: entry 10% cover 30%;
+		animation-fill-mode: both;
+	}
+
+	@keyframes show-up {
+		from { opacity: 0; transform: translateY(40px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	/* Scrollbar estilo Neon */
+	::-webkit-scrollbar {
+		width: 6px;
+	}
+	::-webkit-scrollbar-track {
+		background: #000;
+	}
+	::-webkit-scrollbar-thumb {
+		background: #d946ef;
+		border-radius: 10px;
+	}
+</style>
