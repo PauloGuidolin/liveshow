@@ -7,18 +7,36 @@
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
+		<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+		></script>
+		<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+		></script>
 		<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 	</head>
 	<body>
 		<slot />
-	</body>
-</html>
+		<script>
+			// Usamos "as any" para que TypeScript no marque error
+			const identity = (window as any).netlifyIdentity;
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+			if (identity) {
+				identity.on("init", (user: any) => {
+					if (!user) {
+						identity.on("login", () => {
+							document.location.href = "/admin/";
+						});
+					}
+				});
+			}
+		</script>
+	</body>
+
+	<style>
+		html,
+		body {
+			margin: 0;
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+</html>
