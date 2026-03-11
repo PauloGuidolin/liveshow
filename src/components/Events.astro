@@ -1,7 +1,8 @@
 ---
-import { getCollection } from 'astro:content';
+//import { getCollection } from 'astro:content';
 // Traemos los shows y Astro ya sabrá que cumplen con el esquema anterior
-const shows = await getCollection('shows');
+//const shows = await getCollection('shows');
+const shows: any[] = [];
 ---
 
 <div class="grid md:grid-cols-3 gap-6">
